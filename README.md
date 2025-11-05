@@ -1,4 +1,3 @@
-# ActiveDirectoryLab
 # Active Directory Home Lab Project
 
 ## 🎯 Objectives
