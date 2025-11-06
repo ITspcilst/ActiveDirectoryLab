@@ -35,7 +35,15 @@ All machines were hosted in **Oracle VirtualBox** using a **Host-Only network** 
 ### Step 1 – Virtual Network Configuration
 - Created a **Host-Only Adapter** in VirtualBox to isolate the lab environment.  
 - Assigned the subnet `192.168.77.0/24` for internal routing.  
-- Ensured each virtual machine had a **static IPv4 address** and correct DNS configuration (pointing to DC1).  
+- Ensured each virtual machine had a **static IPv4 address** and correct DNS configuration (pointing to DC1).
+### VirtualBox Network Setup  
+![VirtualBox Host-Only Network Overview](screenshots/virtualbox_vms_overview.png)
+
+### DC01 Network Settings  
+![DC01 Static IP Configuration](screenshots/dc01_network_settings.png)
+
+### DC02 Network Settings  
+![DC02 Static IP Configuration](screenshots/dc02_network_settings.png)
 
 ### Step 2 – Primary Domain Controller (DC1)
 - Installed **Windows Server 2025** and configured a static IP: `192.168.77.10`.  
