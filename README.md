@@ -37,13 +37,13 @@ All machines were hosted in **Oracle VirtualBox** using a **Host-Only network** 
 - Assigned the subnet `192.168.77.0/24` for internal routing.  
 - Ensured each virtual machine had a **static IPv4 address** and correct DNS configuration (pointing to DC1).
 ### VirtualBox Network Setup  
-![VirtualBox Host-Only Network Overview](screenshots/virtualbox_vms_overview.png)
+![VirtualBox Host-Only Network Overview](Screenshots/virtualbox_vms_overview.png)
 
 ### DC01 Network Settings  
-![DC01 Static IP Configuration](screenshots/dc01_network_settings.png)
+![DC01 Static IP Configuration](Screenshots/dc01_network_settings.png)
 
 ### DC02 Network Settings  
-![DC02 Static IP Configuration](screenshots/dc02_network_settings.png)
+![DC02 Static IP Configuration](Screenshots/dc02_network_settings.png)
 
 ### Step 2 – Primary Domain Controller (DC1)
 - Installed **Windows Server 2025** and configured a static IP: `192.168.77.10`.  
@@ -54,6 +54,15 @@ All machines were hosted in **Oracle VirtualBox** using a **Host-Only network** 
   nslookup dc1.corp.local
   ```
 - Confirmed functionality by testing logon and administrative tools (ADUC, DNS Manager).
+- ### Active Directory Installation Wizard  
+![Installing AD DS on DC01](Screenshots/dc01_ad_install.png)
+
+### AD DS Installation Succeeded  
+![AD DS Installation Success Confirmation](Screenshots/dc01_ad_install_succeed.png)
+
+### DNS Zone Created for corp.local  
+![corp.local DNS Zone Configuration](Screenshots/dc01_dns_zone.png)
+
 
 ### Step 3 – Secondary Domain Controller (DC2)
 - Installed **Windows Server 2025**, static IP: `192.168.77.11`, DNS pointed to `192.168.77.10`.  
@@ -64,16 +73,36 @@ All machines were hosted in **Oracle VirtualBox** using a **Host-Only network** 
   repadmin /replsummary
   ```
 - Confirmed both DCs responded to DNS and authentication requests.
+- ### DC2 Promoted to Domain Controller  
+![DC02 Domain Controller Promotion Success](Screenshots/dc2_promotion_success_.png)
+
+### Replication Verification  
+![Replication Summary After Join](Screenshots/dc2_replsummary_after_join.png)
+
 
 ### Step 4 – Domain Client (CLIENT01)
 - Installed **Windows 10/11**, static IP: `192.168.77.20`, DNS: `192.168.77.10`.  
 - Joined the `corp.local` domain successfully.  
 - Verified domain connectivity using:
   ```powershell
-  echo %USERDOMAIN%
   whoami
   ```
 - Logged in using a domain user account created via **Active Directory Users and Computers**.
+- ### Client Network Configuration  
+![CLIENT01 Static IP and DNS Settings](Screenshots/client01_network_config.png)
+
+### Connectivity Test  
+![CLIENT01 Ping and Nslookup Results](Screenshots/client01_ping_nslookup.png)
+
+### Domain Join Success  
+![CLIENT01 Successfully Joined corp.local](Screenshots/client01_domain_join_success.png)
+
+### Verify Domain Membership  
+![CLIENT01 Domain Membership Confirmation](Screenshots/client01_verify_domain_membership.png)
+
+### Login Test with Domain Account  
+![Login with Domain Admin](Screenshots/client01_login_domain_admin.png)
+
 
 ### Step 5 – Group Policy & User Management
 - Created Organizational Units (OUs) for `Users`, `Computers`, and `Admins`.  
@@ -83,6 +112,26 @@ All machines were hosted in **Oracle VirtualBox** using a **Host-Only network** 
   gpupdate /force
   gpresult /r
   ```
+### Created Organizational Units  
+![OUs for Users, Computers, and Admins](Screenshots/dc1_created_organizational_units.png)
+
+### Password Complexity Policy Configured  
+![Password Complexity GPO Configuration](Screenshots/dc1_gpo_password_complexity.png)
+
+### GPO Applied Successfully  
+![GPO Result Shown on Client01](Screenshots/client01_gpresult_gpo_applied.png)
+
+### Password Policy Verified  
+![Password Complexity Policy Verified](Screenshots/client01_Password_Complexity_Policy_Applied.png)
+
+## 📁 File Sharing Test
+### Shared Folder Configuration on DC1  
+![DC1 Shared Folder Properties](Screenshots/dc1_share_folder_properties.png)
+
+### Accessing the Share from Client01  
+![Accessing Shared Folder from Client01](Screenshots/client01_access_share_explorer.png)
+
+
 
 ---
 
